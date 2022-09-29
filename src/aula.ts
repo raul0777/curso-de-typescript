@@ -580,62 +580,93 @@
 // console.log(db === db2);
 
 // /* ################# Aula 30 ################# */
-export class Escritor {
-  private _ferramenta: Ferramenta | null = null;
+// export class Escritor {
+//   private _ferramenta: Ferramenta | null = null;
 
-  constructor(private _nome: string) {}
+//   constructor(private _nome: string) {}
 
-  get nome(): string {
-    return this._nome;
-  }
+//   get nome(): string {
+//     return this._nome;
+//   }
 
-  set ferramenta(ferramenta: Ferramenta | null) {
-    this._ferramenta = ferramenta;
-  }
+//   set ferramenta(ferramenta: Ferramenta | null) {
+//     this._ferramenta = ferramenta;
+//   }
 
-  get ferramenta(): Ferramenta | null {
-    return this._ferramenta;
-  }
+//   get ferramenta(): Ferramenta | null {
+//     return this._ferramenta;
+//   }
 
-  escrever(): void {
-    if (this.ferramenta === null) {
-      console.log('Não posso escrever sem ferramenta...');
-      return;
+//   escrever(): void {
+//     if (this.ferramenta === null) {
+//       console.log('Não posso escrever sem ferramenta...');
+//       return;
+//     }
+//     this.ferramenta.escrever();
+//   }
+// }
+
+// export abstract class Ferramenta {
+//   constructor(private _nome: string) {}
+//   abstract escrever(): void;
+
+//   get nome(): string {
+//     return this._nome;
+//   }
+// }
+
+// export class Caneta extends Ferramenta {
+//   escrever(): void {
+//     console.log(`${this.nome} está escrevendo...`);
+//   }
+// }
+
+// export class MaquinaEscrever extends Ferramenta {
+//   escrever(): void {
+//     console.log(`${this.nome} está digitando...`);
+//   }
+// }
+
+// const escritor = new Escritor('Raul');
+// const caneta = new Caneta('Bic');
+// const maquinaEscrever = new MaquinaEscrever('Maquina');
+
+// console.log(escritor.nome);
+// console.log(caneta.nome);
+// console.log(maquinaEscrever.nome);
+
+// escritor.ferramenta = caneta;
+// escritor.ferramenta = maquinaEscrever;
+// escritor.ferramenta = null;
+// escritor.escrever();
+
+// /* ################# Aula 31 ################# */
+export class CarrinhoDeCompras {
+  private readonly produtos: Produto[] = [];
+
+  inserirProdutos(...produtos: Produto[]): void {
+    for (const produto of produtos) {
+      this.produtos.push(produto);
     }
-    this.ferramenta.escrever();
+  }
+
+  quantidadeProduto(): number {
+    return this.produtos.length;
+  }
+
+  valorTotal(): number {
+    return this.produtos.reduce((soma, produto) => soma + produto.valor, 0);
   }
 }
 
-export abstract class Ferramenta {
-  constructor(private _nome: string) {}
-  abstract escrever(): void;
-
-  get nome(): string {
-    return this._nome;
-  }
+export class Produto {
+  constructor(public nome: string, public valor: number) {}
 }
+const produto1 = new Produto('Camiseta', 49.9);
+const produto2 = new Produto('Caneca', 4.9);
+const produto3 = new Produto('Caneta', 0.9);
 
-export class Caneta extends Ferramenta {
-  escrever(): void {
-    console.log(`${this.nome} está escrevendo...`);
-  }
-}
-
-export class MaquinaEscrever extends Ferramenta {
-  escrever(): void {
-    console.log(`${this.nome} está digitando...`);
-  }
-}
-
-const escritor = new Escritor('Raul');
-const caneta = new Caneta('Bic');
-const maquinaEscrever = new MaquinaEscrever('Maquina');
-
-console.log(escritor.nome);
-console.log(caneta.nome);
-console.log(maquinaEscrever.nome);
-
-escritor.ferramenta = caneta;
-escritor.ferramenta = maquinaEscrever;
-escritor.ferramenta = null;
-escritor.escrever();
+const carrinhoDeCompras = new CarrinhoDeCompras();
+carrinhoDeCompras.inserirProdutos(produto1, produto2, produto3);
+console.log(carrinhoDeCompras.valorTotal());
+console.log(carrinhoDeCompras.quantidadeProduto());

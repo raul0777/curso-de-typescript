@@ -631,4 +631,11 @@ const escritor = new Escritor('Raul');
 const caneta = new Caneta('Bic');
 const maquinaEscrever = new MaquinaEscrever('Maquina');
 
+console.log(escritor.nome);
+console.log(caneta.nome);
+console.log(maquinaEscrever.nome);
+
+escritor.ferramenta = caneta;
+escritor.ferramenta = maquinaEscrever;
+escritor.ferramenta = null;
 escritor.escrever();

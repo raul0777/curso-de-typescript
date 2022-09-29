@@ -7,6 +7,9 @@
 // let simbolo: symbol = Symbol('qualquer-symbol'); //symbol
 // //let big: bigint = 10n; //bigint
 
+import exp from 'constants';
+import { type } from 'os';
+
 // //Arrays
 // let arrayDeNumero: Array<number> = [1, 2, 3];
 // let arrayDeNumero2: number[] = [1, 2, 3];
@@ -672,46 +675,69 @@
 // console.log(carrinhoDeCompras.quantidadeProduto());
 
 // /* ################# Aula 32 ################# */
-export class Carro {
-  private readonly motor = new Motor();
+// export class Carro {
+//   private readonly motor = new Motor();
 
-  ligar(): void {
-    this.motor.ligar();
-  }
+//   ligar(): void {
+//     this.motor.ligar();
+//   }
 
-  acelera(): void {
-    this.motor.acelera();
-  }
+//   acelera(): void {
+//     this.motor.acelera();
+//   }
 
-  parar(): void {
-    this.motor.parar();
-  }
+//   parar(): void {
+//     this.motor.parar();
+//   }
 
-  desligar(): void {
-    this.motor.desligar();
+//   desligar(): void {
+//     this.motor.desligar();
+//   }
+// }
+
+// export class Motor {
+//   ligar(): void {
+//     console.log('Motor está ligado...');
+//   }
+
+//   acelera(): void {
+//     console.log('Motor está acelerando...');
+//   }
+
+//   parar(): void {
+//     console.log('Motor está parando...');
+//   }
+
+//   desligar(): void {
+//     console.log('Motor está desligando...');
+//   }
+// }
+
+// const carro = new Carro();
+// carro.ligar();
+// carro.acelera();
+// carro.parar();
+// carro.desligar();
+
+// /* ################# Aula 33 ################# */
+type TipoNome = {
+  nome: string;
+};
+
+type TipoSobrenome = {
+  sobrenome: string;
+};
+
+type TipoNomeCompleto = {
+  nomeCompleto: () => string;
+};
+export class Pessoa implements TipoNome, TipoSobrenome, TipoNomeCompleto {
+  constructor(public nome: string, public sobrenome: string) {}
+
+  nomeCompleto(): string {
+    return this.nome + ' ' + this.sobrenome;
   }
 }
 
-export class Motor {
-  ligar(): void {
-    console.log('Motor está ligado...');
-  }
-
-  acelera(): void {
-    console.log('Motor está acelerando...');
-  }
-
-  parar(): void {
-    console.log('Motor está parando...');
-  }
-
-  desligar(): void {
-    console.log('Motor está desligando...');
-  }
-}
-
-const carro = new Carro();
-carro.ligar();
-carro.acelera();
-carro.parar();
-carro.desligar();
+const pessoa = new Pessoa('Raul', 'Gomes');
+console.log(pessoa.nomeCompleto());

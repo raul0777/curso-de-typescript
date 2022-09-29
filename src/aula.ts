@@ -720,18 +720,46 @@ import { type } from 'os';
 // carro.desligar();
 
 // /* ################# Aula 33 ################# */
-type TipoNome = {
+// type TipoNome = {
+//   nome: string;
+// };
+
+// type TipoSobrenome = {
+//   sobrenome: string;
+// };
+
+// type TipoNomeCompleto = {
+//   nomeCompleto: () => string;
+// };
+
+// type TipoPessoa = TipoNome & TipoSobrenome & TipoNomeCompleto;
+
+// export class Pessoa implements TipoPessoa {
+//   constructor(public nome: string, public sobrenome: string) {}
+
+//   nomeCompleto(): string {
+//     return this.nome + ' ' + this.sobrenome;
+//   }
+// }
+
+// const pessoa = new Pessoa('Raul', 'Gomes');
+// console.log(pessoa.nomeCompleto());
+
+// /* ################# Aula 33 ################# */
+interface TipoNome {
   nome: string;
-};
+}
 
-type TipoSobrenome = {
+interface TipoSobrenome {
   sobrenome: string;
-};
+}
 
-type TipoNomeCompleto = {
-  nomeCompleto: () => string;
-};
-export class Pessoa implements TipoNome, TipoSobrenome, TipoNomeCompleto {
+interface TipoNomeCompleto {
+  nomeCompleto(): string;
+}
+
+interface TipoPessoa1 extends TipoNome, TipoSobrenome, TipoNomeCompleto {}
+export class Pessoa implements TipoPessoa1 {
   constructor(public nome: string, public sobrenome: string) {}
 
   nomeCompleto(): string {
@@ -739,5 +767,14 @@ export class Pessoa implements TipoNome, TipoSobrenome, TipoNomeCompleto {
   }
 }
 
+const pessoaObj: TipoPessoa1 = {
+  nomeCompleto() {
+    return this.nome + ' ' + this.sobrenome;
+  },
+  nome: 'Raul',
+  sobrenome: 'Agora tá ok',
+};
+
 const pessoa = new Pessoa('Raul', 'Gomes');
 console.log(pessoa.nomeCompleto());
+console.log(pessoaObj.nomeCompleto());

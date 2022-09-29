@@ -641,32 +641,77 @@
 // escritor.escrever();
 
 // /* ################# Aula 31 ################# */
-export class CarrinhoDeCompras {
-  private readonly produtos: Produto[] = [];
+// export class CarrinhoDeCompras {
+//   private readonly produtos: Produto[] = [];
 
-  inserirProdutos(...produtos: Produto[]): void {
-    for (const produto of produtos) {
-      this.produtos.push(produto);
-    }
+//   inserirProdutos(...produtos: Produto[]): void {
+//     for (const produto of produtos) {
+//       this.produtos.push(produto);
+//     }
+//   }
+
+//   quantidadeProduto(): number {
+//     return this.produtos.length;
+//   }
+
+//   valorTotal(): number {
+//     return this.produtos.reduce((soma, produto) => soma + produto.valor, 0);
+//   }
+// }
+
+// export class Produto {
+//   constructor(public nome: string, public valor: number) {}
+// }
+// const produto1 = new Produto('Camiseta', 49.9);
+// const produto2 = new Produto('Caneca', 4.9);
+// const produto3 = new Produto('Caneta', 0.9);
+
+// const carrinhoDeCompras = new CarrinhoDeCompras();
+// carrinhoDeCompras.inserirProdutos(produto1, produto2, produto3);
+// console.log(carrinhoDeCompras.valorTotal());
+// console.log(carrinhoDeCompras.quantidadeProduto());
+
+// /* ################# Aula 32 ################# */
+export class Carro {
+  private readonly motor = new Motor();
+
+  ligar(): void {
+    this.motor.ligar();
   }
 
-  quantidadeProduto(): number {
-    return this.produtos.length;
+  acelera(): void {
+    this.motor.acelera();
   }
 
-  valorTotal(): number {
-    return this.produtos.reduce((soma, produto) => soma + produto.valor, 0);
+  parar(): void {
+    this.motor.parar();
+  }
+
+  desligar(): void {
+    this.motor.desligar();
   }
 }
 
-export class Produto {
-  constructor(public nome: string, public valor: number) {}
-}
-const produto1 = new Produto('Camiseta', 49.9);
-const produto2 = new Produto('Caneca', 4.9);
-const produto3 = new Produto('Caneta', 0.9);
+export class Motor {
+  ligar(): void {
+    console.log('Motor está ligado...');
+  }
 
-const carrinhoDeCompras = new CarrinhoDeCompras();
-carrinhoDeCompras.inserirProdutos(produto1, produto2, produto3);
-console.log(carrinhoDeCompras.valorTotal());
-console.log(carrinhoDeCompras.quantidadeProduto());
+  acelera(): void {
+    console.log('Motor está acelerando...');
+  }
+
+  parar(): void {
+    console.log('Motor está parando...');
+  }
+
+  desligar(): void {
+    console.log('Motor está desligando...');
+  }
+}
+
+const carro = new Carro();
+carro.ligar();
+carro.acelera();
+carro.parar();
+carro.desligar();

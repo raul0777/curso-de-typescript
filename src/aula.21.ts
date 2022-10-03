@@ -71,61 +71,77 @@
 // console.log(carro);
 
 // /* ################# Aula 40 ################# */
-export class Calculadora {
-  constructor(public numero: number) {}
+// export class Calculadora {
+//   constructor(public numero: number) {}
 
-  add(n: number): this {
-    this.numero += n;
-    return this;
-  }
+//   add(n: number): this {
+//     this.numero += n;
+//     return this;
+//   }
 
-  sub(n: number): this {
-    this.numero -= n;
-    return this;
-  }
+//   sub(n: number): this {
+//     this.numero -= n;
+//     return this;
+//   }
 
-  div(n: number): this {
-    this.numero /= n;
-    return this;
-  }
+//   div(n: number): this {
+//     this.numero /= n;
+//     return this;
+//   }
 
-  mul(n: number): this {
-    this.numero *= n;
-    return this;
-  }
-}
+//   mul(n: number): this {
+//     this.numero *= n;
+//     return this;
+//   }
+// }
 
-export class SubCalculadora extends Calculadora {
-  pow(n: number): this {
-    this.numero **= n;
-    return this;
-  }
-}
+// export class SubCalculadora extends Calculadora {
+//   pow(n: number): this {
+//     this.numero **= n;
+//     return this;
+//   }
+// }
 
-const calculadora = new SubCalculadora(10);
-calculadora.add(5).mul(2).div(2).sub(5).pow(2);
-console.log(calculadora);
+// const calculadora = new SubCalculadora(10);
+// calculadora.add(5).mul(2).div(2).sub(5).pow(2);
+// console.log(calculadora);
 
-//Builder -GoF
+// //Builder -GoF
 
-export class RequestBuilder {
-  private method: 'get' | 'post' | null = null;
-  private url: string | null = null;
+// export class RequestBuilder {
+//   private method: 'get' | 'post' | null = null;
+//   private url: string | null = null;
 
-  setMethod(method: 'get' | 'post'): this {
-    this.method = method;
-    return this;
-  }
+//   setMethod(method: 'get' | 'post'): this {
+//     this.method = method;
+//     return this;
+//   }
 
-  setUrl(url: string): this {
-    this.url = url;
-    return this;
-  }
+//   setUrl(url: string): this {
+//     this.url = url;
+//     return this;
+//   }
 
-  send(): void {
-    console.log(`Enviando dados via ${this.method} para ${this.url}`);
-  }
-}
+//   send(): void {
+//     console.log(`Enviando dados via ${this.method} para ${this.url}`);
+//   }
+// }
 
-const request = new RequestBuilder(); //Builder
-request.setUrl('http://www.google.com').setMethod('post').send();
+// const request = new RequestBuilder(); //Builder
+// request.setUrl('http://www.google.com').setMethod('post').send();
+
+// /* ################# Aula 41 ################# */
+type Adder = {
+  (x: number): number;
+  (x: number, y: number): number;
+  (...arg: number[]): number;
+};
+
+const adder: Adder = (x: number, y?: number, ...args: number[]) => {
+  if (args.length > 0) return args.reduce((s, v) => s + v, 0) + x + (y || 0);
+  return x + (y || 0);
+};
+
+console.log(adder(1));
+console.log(adder(1, 2));
+console.log(adder(1, 2, 3));

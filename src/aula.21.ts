@@ -131,17 +131,38 @@
 // request.setUrl('http://www.google.com').setMethod('post').send();
 
 // /* ################# Aula 41 ################# */
-type Adder = {
-  (x: number): number;
-  (x: number, y: number): number;
-  (...arg: number[]): number;
+// type Adder = {
+//   (x: number): number;
+//   (x: number, y: number): number;
+//   (...arg: number[]): number;
+// };
+
+// const adder: Adder = (x: number, y?: number, ...args: number[]) => {
+//   if (args.length > 0) return args.reduce((s, v) => s + v, 0) + x + (y || 0);
+//   return x + (y || 0);
+// };
+
+// console.log(adder(1));
+// console.log(adder(1, 2));
+// console.log(adder(1, 2, 3));
+
+// /* ################# Aula 42 ################# */
+//Encadeamento opcional e Operacional de coalescência nula
+type Documento = {
+  titulo: string;
+  texto: string;
+  data?: Date;
 };
 
-const adder: Adder = (x: number, y?: number, ...args: number[]) => {
-  if (args.length > 0) return args.reduce((s, v) => s + v, 0) + x + (y || 0);
-  return x + (y || 0);
+const documento: Documento = {
+  titulo: 'O título',
+  texto: 'O texto',
+  data: new Date(),
 };
 
-console.log(adder(1));
-console.log(adder(1, 2));
-console.log(adder(1, 2, 3));
+console.log(' ' ?? '1-Ixi, não existe.');
+console.log(documento.data?.toDateString() ?? '2-Ixi, não existe.');
+console.log(undefined ?? '3-Ixi, não existe.');
+console.log(false ?? '4-Ixi, não existe.');
+console.log(null ?? '5-Ixi, não existe.');
+console.log(0 ?? '6-Ixi, não existe.');

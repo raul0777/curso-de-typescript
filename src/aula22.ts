@@ -21,3 +21,22 @@
 // console.log(arrayFiltrando);
 
 /* ################# Aula 44 ################# */
+type MeuTipo = number;
+
+const arrayNumber: Array<number> = [1, 2, 3, 4, 5];
+console.log(arrayNumber);
+
+async function promiseAsync() {
+  return 1;
+}
+
+function minhaPromise(): Promise<MeuTipo> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(1);
+    }, 1000);
+  });
+}
+
+promiseAsync().then((resultado) => console.log(resultado + 1));
+minhaPromise().then((resultado) => console.log(resultado + 1));

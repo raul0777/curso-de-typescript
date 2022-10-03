@@ -137,12 +137,31 @@
 // }
 
 // /* ################# Aula 48 ################# */
-export function unirObjetos<O1, O2>(obj1: O1, obj2: O2): O1 & O2 {
-  //return { ...obj1, ...obj2 };
-  return Object.assign({}, obj1, obj2);
+// export function unirObjetos<O1, O2>(obj1: O1, obj2: O2): O1 & O2 {
+//   //return { ...obj1, ...obj2 };
+//   return Object.assign({}, obj1, obj2);
+// }
+
+// const obj1 = { chave1: 'valor1' };
+// const obj2 = { chave2: 'valor2' };
+// const juntar = unirObjetos(obj1, obj2);
+// console.log(juntar);
+
+// /* ################# Aula 49 ################# */
+export function isNumber(value: unknown): value is number {
+  return typeof value === 'number';
 }
 
-const obj1 = { chave1: 'valor1' };
-const obj2 = { chave2: 'valor2' };
-const juntar = unirObjetos(obj1, obj2);
-console.log(juntar);
+export function soma<T>(...args: T[]): number | null {
+  const retorno = args.reduce((sum, value) => {
+    if (isNumber(sum) && isNumber(value)) {
+      return sum + value;
+    }
+    return sum;
+  }, 0);
+  return retorno;
+}
+
+console.log(soma(1, 2, 3));
+console.log(soma(...[1, 2, 3, 'a', 'b', 'c', 1]));
+console.log(soma('a', 'b', 'c'));

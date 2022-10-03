@@ -1,8 +1,6 @@
 // /* ################# Aula 43 ################# */
 // type FilterCallback<U> = (valor: U, index?: number, array?: U[]) => boolean;
 
-import { type } from 'os';
-
 // export function meuFilter<T>(array: T[], callbackfn: FilterCallback<T>): T[] {
 //   const novoArray = [];
 
@@ -92,48 +90,59 @@ import { type } from 'os';
 // console.log(vacinas, cor, obterChave(animal, 'idade'));
 
 // /* ################# Aula 47 ################# */
-export class Pessoa<T, U> {
-  constructor(public nome: T, public idade: U) {}
+// export class Pessoa<T, U> {
+//   constructor(public nome: T, public idade: U) {}
+// }
+// export class Pilha<T> {
+//   private contador = 0;
+//   private elemento: { [k: number]: T } = {};
+
+//   push(elemento: T): void {
+//     this.elemento[this.contador] = elemento;
+//     this.contador++;
+//   }
+
+//   pop(): T | void {
+//     if (this.estaVazia()) return undefined;
+
+//     this.contador--;
+//     const elemento = this.elemento[this.contador];
+//     delete this.elemento[this.contador];
+//     return elemento;
+//   }
+
+//   estaVazia(): boolean {
+//     return this.contador === 0;
+//   }
+
+//   tamanho(): number {
+//     return this.contador;
+//   }
+//   mostraPilha(): void {
+//     for (const chave in this.elemento) {
+//       console.log(this.elemento[chave]);
+//     }
+//   }
+// }
+
+// const pilha = new Pilha<number | string>();
+// pilha.push(1);
+// pilha.push(2);
+// pilha.push(3);
+// pilha.push(4);
+// pilha.push('string');
+
+// while (!pilha.estaVazia()) {
+//   console.log(pilha.pop());
+// }
+
+// /* ################# Aula 48 ################# */
+export function unirObjetos<O1, O2>(obj1: O1, obj2: O2): O1 & O2 {
+  //return { ...obj1, ...obj2 };
+  return Object.assign({}, obj1, obj2);
 }
-export class Pilha<T> {
-  private contador = 0;
-  private elemento: { [k: number]: T } = {};
 
-  push(elemento: T): void {
-    this.elemento[this.contador] = elemento;
-    this.contador++;
-  }
-
-  pop(): T | void {
-    if (this.estaVazia()) return undefined;
-
-    this.contador--;
-    const elemento = this.elemento[this.contador];
-    delete this.elemento[this.contador];
-    return elemento;
-  }
-
-  estaVazia(): boolean {
-    return this.contador === 0;
-  }
-
-  tamanho(): number {
-    return this.contador;
-  }
-  mostraPilha(): void {
-    for (const chave in this.elemento) {
-      console.log(this.elemento[chave]);
-    }
-  }
-}
-
-const pilha = new Pilha<number | string>();
-pilha.push(1);
-pilha.push(2);
-pilha.push(3);
-pilha.push(4);
-pilha.push('string');
-
-while (!pilha.estaVazia()) {
-  console.log(pilha.pop());
-}
+const obj1 = { chave1: 'valor1' };
+const obj2 = { chave2: 'valor2' };
+const juntar = unirObjetos(obj1, obj2);
+console.log(juntar);

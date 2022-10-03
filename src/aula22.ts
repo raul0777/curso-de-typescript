@@ -76,17 +76,64 @@ import { type } from 'os';
 // console.log(aluno1, aluno2, aluno3);
 
 // /* ################# Aula 46 ################# */
-type ObterChaveFn = <O, K extends keyof O>(objeto: O, chave: K) => O[K];
+// type ObterChaveFn = <O, K extends keyof O>(objeto: O, chave: K) => O[K];
 
-const obterChave: ObterChaveFn = (objeto, chave) => objeto[chave];
+// const obterChave: ObterChaveFn = (objeto, chave) => objeto[chave];
 
-const animal = {
-  cor: 'Rosa',
-  vacina: ['Vacina 1,', 'Vacina 2'],
-  idade: 10,
-};
+// const animal = {
+//   cor: 'Rosa',
+//   vacina: ['Vacina 1,', 'Vacina 2'],
+//   idade: 10,
+// };
 
-const vacinas = obterChave(animal, 'vacina');
-const cor = obterChave(animal, 'cor');
+// const vacinas = obterChave(animal, 'vacina');
+// const cor = obterChave(animal, 'cor');
 
-console.log(vacinas, cor, obterChave(animal, 'idade'));
+// console.log(vacinas, cor, obterChave(animal, 'idade'));
+
+// /* ################# Aula 47 ################# */
+export class Pessoa<T, U> {
+  constructor(public nome: T, public idade: U) {}
+}
+export class Pilha<T> {
+  private contador = 0;
+  private elemento: { [k: number]: T } = {};
+
+  push(elemento: T): void {
+    this.elemento[this.contador] = elemento;
+    this.contador++;
+  }
+
+  pop(): T | void {
+    if (this.estaVazia()) return undefined;
+
+    this.contador--;
+    const elemento = this.elemento[this.contador];
+    delete this.elemento[this.contador];
+    return elemento;
+  }
+
+  estaVazia(): boolean {
+    return this.contador === 0;
+  }
+
+  tamanho(): number {
+    return this.contador;
+  }
+  mostraPilha(): void {
+    for (const chave in this.elemento) {
+      console.log(this.elemento[chave]);
+    }
+  }
+}
+
+const pilha = new Pilha<number | string>();
+pilha.push(1);
+pilha.push(2);
+pilha.push(3);
+pilha.push(4);
+pilha.push('string');
+
+while (!pilha.estaVazia()) {
+  console.log(pilha.pop());
+}

@@ -32,20 +32,40 @@
 // mostraNome({ tipo: 'animal', cor: 'Rosa' });
 
 // /* ################# Aula 38 ################# */
-type CoresObj = typeof coresObj;
-type CoresChaves = keyof CoresObj;
+// type CoresObj = typeof coresObj;
+// type CoresChaves = keyof CoresObj;
 
-const coresObj = {
-  vermelho: 'red',
-  verde: 'green',
-  azul: 'blue',
-  roxo: 'purple',
+// const coresObj = {
+//   vermelho: 'red',
+//   verde: 'green',
+//   azul: 'blue',
+//   roxo: 'purple',
+// };
+
+// function traduzirCore(cor: CoresChaves, cores: CoresObj) {
+//   return cores[cor];
+// }
+
+// console.log(traduzirCore('vermelho', coresObj));
+// console.log(traduzirCore('verde', coresObj));
+// console.log(traduzirCore('roxo', coresObj));
+
+// /* ################# Aula 39 ################# */
+type Veiculo = {
+  marca: string;
+  ano: number;
 };
 
-function traduzirCore(cor: CoresChaves, cores: CoresObj) {
-  return cores[cor];
-}
+type Car = {
+  brand: Veiculo['marca'];
+  year: Veiculo['ano'];
+  name: string;
+};
 
-console.log(traduzirCore('vermelho', coresObj));
-console.log(traduzirCore('verde', coresObj));
-console.log(traduzirCore('roxo', coresObj));
+const carro: Car = {
+  brand: 'Ford',
+  year: 2020,
+  name: 'ka',
+};
+
+console.log(carro);

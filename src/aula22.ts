@@ -1,6 +1,8 @@
 // /* ################# Aula 43 ################# */
 // type FilterCallback<U> = (valor: U, index?: number, array?: U[]) => boolean;
 
+import { type } from 'os';
+
 // export function meuFilter<T>(array: T[], callbackfn: FilterCallback<T>): T[] {
 //   const novoArray = [];
 
@@ -20,23 +22,55 @@
 // const arrayFiltrando = meuFilter(array, (value) => value < 5);
 // console.log(arrayFiltrando);
 
-/* ################# Aula 44 ################# */
-type MeuTipo = number;
+// /* ################# Aula 44 ################# */
+// type MeuTipo = number;
 
-const arrayNumber: Array<number> = [1, 2, 3, 4, 5];
-console.log(arrayNumber);
+// const arrayNumber: Array<number> = [1, 2, 3, 4, 5];
+// console.log(arrayNumber);
 
-async function promiseAsync() {
-  return 1;
+// async function promiseAsync() {
+//   return 1;
+// }
+
+// function minhaPromise(): Promise<MeuTipo> {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(1);
+//     }, 1000);
+//   });
+// }
+
+// promiseAsync().then((resultado) => console.log(resultado + 1));
+// minhaPromise().then((resultado) => console.log(resultado + 1));
+
+/* ################# Aula 45 ################# */
+interface PessoaProtocolo<T = string, U = number> {
+  nome: T;
+  sobrenome: T;
+  idade: U;
 }
 
-function minhaPromise(): Promise<MeuTipo> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(1);
-    }, 1000);
-  });
-}
+type PessoaProtocolo2<T = string, U = number> = {
+  nome: T;
+  sobrenome: T;
+  idade: U;
+};
 
-promiseAsync().then((resultado) => console.log(resultado + 1));
-minhaPromise().then((resultado) => console.log(resultado + 1));
+const aluno1: PessoaProtocolo2<string, number> = {
+  nome: 'Raul',
+  sobrenome: 'Gomes',
+  idade: 30,
+};
+
+const aluno2: PessoaProtocolo<number, number> = {
+  nome: 123,
+  sobrenome: 456,
+  idade: 31,
+};
+
+const aluno3: PessoaProtocolo2 = {
+  nome: 'Romeu',
+  sobrenome: 'Carvalho',
+  idade: 32,
+};
+console.log(aluno1, aluno2, aluno3);

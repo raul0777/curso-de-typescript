@@ -43,34 +43,50 @@ import { type } from 'os';
 // promiseAsync().then((resultado) => console.log(resultado + 1));
 // minhaPromise().then((resultado) => console.log(resultado + 1));
 
-/* ################# Aula 45 ################# */
-interface PessoaProtocolo<T = string, U = number> {
-  nome: T;
-  sobrenome: T;
-  idade: U;
-}
+// /* ################# Aula 45 ################# */
+// interface PessoaProtocolo<T = string, U = number> {
+//   nome: T;
+//   sobrenome: T;
+//   idade: U;
+// }
 
-type PessoaProtocolo2<T = string, U = number> = {
-  nome: T;
-  sobrenome: T;
-  idade: U;
+// type PessoaProtocolo2<T = string, U = number> = {
+//   nome: T;
+//   sobrenome: T;
+//   idade: U;
+// };
+
+// const aluno1: PessoaProtocolo2<string, number> = {
+//   nome: 'Raul',
+//   sobrenome: 'Gomes',
+//   idade: 30,
+// };
+
+// const aluno2: PessoaProtocolo<number, number> = {
+//   nome: 123,
+//   sobrenome: 456,
+//   idade: 31,
+// };
+
+// const aluno3: PessoaProtocolo2 = {
+//   nome: 'Romeu',
+//   sobrenome: 'Carvalho',
+//   idade: 32,
+// };
+// console.log(aluno1, aluno2, aluno3);
+
+// /* ################# Aula 46 ################# */
+type ObterChaveFn = <O, K extends keyof O>(objeto: O, chave: K) => O[K];
+
+const obterChave: ObterChaveFn = (objeto, chave) => objeto[chave];
+
+const animal = {
+  cor: 'Rosa',
+  vacina: ['Vacina 1,', 'Vacina 2'],
+  idade: 10,
 };
 
-const aluno1: PessoaProtocolo2<string, number> = {
-  nome: 'Raul',
-  sobrenome: 'Gomes',
-  idade: 30,
-};
+const vacinas = obterChave(animal, 'vacina');
+const cor = obterChave(animal, 'cor');
 
-const aluno2: PessoaProtocolo<number, number> = {
-  nome: 123,
-  sobrenome: 456,
-  idade: 31,
-};
-
-const aluno3: PessoaProtocolo2 = {
-  nome: 'Romeu',
-  sobrenome: 'Carvalho',
-  idade: 32,
-};
-console.log(aluno1, aluno2, aluno3);
+console.log(vacinas, cor, obterChave(animal, 'idade'));

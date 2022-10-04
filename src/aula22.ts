@@ -148,20 +148,88 @@
 // console.log(juntar);
 
 // /* ################# Aula 49 ################# */
-export function isNumber(value: unknown): value is number {
-  return typeof value === 'number';
+// export function isNumber(value: unknown): value is number {
+//   return typeof value === 'number';
+// }
+
+// export function soma<T>(...args: T[]): number | null {
+//   const retorno = args.reduce((sum, value) => {
+//     if (isNumber(sum) && isNumber(value)) {
+//       return sum + value;
+//     }
+//     return sum;
+//   }, 0);
+//   return retorno;
+// }
+
+// console.log(soma(1, 2, 3));
+// console.log(soma(...[1, 2, 3, 'a', 'b', 'c', 1]));
+// console.log(soma('a', 'b', 'c'));
+
+// /* ################# Aula 50 ################# */
+//Record
+const objeto1: Record<string, string | number> = {
+  nome: 'Raul',
+  sobrenome: 'Gomes',
+  idade: 30,
+};
+
+console.log(objeto1);
+
+type PessoaProtocol = {
+  nome?: string;
+  sobrenome?: string;
+  idade?: number;
+};
+
+//Required ~ Transforma tudo que opcional em obrigatório.
+type PessoaRequired = Required<PessoaProtocol>;
+//Required ~ Transforma tudo que obrigatório em opcional.
+type PessoaPartial = Partial<PessoaRequired>;
+//Readonly
+type PessoaReadonly = Readonly<PessoaRequired>;
+//Pick ~ Escolhe as chaves que eu quero do objeto.
+type PessoaPick = Pick<PessoaRequired, 'nome' | 'sobrenome'>;
+
+const objeto2: PessoaReadonly = {
+  nome: 'Romeu',
+  sobrenome: 'Carvalho',
+  idade: 31,
+};
+console.log(objeto2);
+
+//Extract e Exclude
+type ABC = 'A' | 'B' | 'C';
+type CDE = 'C' | 'D' | 'E';
+type TipoExclude = Exclude<ABC, CDE>;
+type TipoExtract = Extract<ABC, CDE>;
+
+//
+type AccountMongo = {
+  _id: string;
+  nome: string;
+  sobrenome: string;
+  idade: number;
+};
+
+type AccountApi = Pick<AccountMongo, Exclude<keyof AccountMongo, '_id'>> & {
+  id: string;
+};
+
+const accountMongo: AccountMongo = {
+  _id: '06179',
+  nome: 'Raul',
+  sobrenome: 'Gomes',
+  idade: 30,
+};
+
+function mapAccount(accountMongo: AccountMongo): AccountApi {
+  const { _id, ...accountData } = accountMongo;
+  return { ...accountData, id: _id };
 }
 
-export function soma<T>(...args: T[]): number | null {
-  const retorno = args.reduce((sum, value) => {
-    if (isNumber(sum) && isNumber(value)) {
-      return sum + value;
-    }
-    return sum;
-  }, 0);
-  return retorno;
-}
+const accountApi = mapAccount(accountMongo);
+console.log(accountApi);
 
-console.log(soma(1, 2, 3));
-console.log(soma(...[1, 2, 3, 'a', 'b', 'c', 1]));
-console.log(soma('a', 'b', 'c'));
+//module mode
+export default 1;

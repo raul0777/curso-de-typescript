@@ -167,69 +167,151 @@
 // console.log(soma('a', 'b', 'c'));
 
 // /* ################# Aula 50 ################# */
-//Record
-const objeto1: Record<string, string | number> = {
-  nome: 'Raul',
-  sobrenome: 'Gomes',
-  idade: 30,
+// //Record
+// const objeto1: Record<string, string | number> = {
+//   nome: 'Raul',
+//   sobrenome: 'Gomes',
+//   idade: 30,
+// };
+
+// console.log(objeto1);
+
+// type PessoaProtocol = {
+//   nome?: string;
+//   sobrenome?: string;
+//   idade?: number;
+// };
+
+// //Required ~ Transforma tudo que opcional em obrigatório.
+// type PessoaRequired = Required<PessoaProtocol>;
+// //Required ~ Transforma tudo que obrigatório em opcional.
+// type PessoaPartial = Partial<PessoaRequired>;
+// //Readonly
+// type PessoaReadonly = Readonly<PessoaRequired>;
+// //Pick ~ Escolhe as chaves que eu quero do objeto.
+// type PessoaPick = Pick<PessoaRequired, 'nome' | 'sobrenome'>;
+
+// const objeto2: PessoaReadonly = {
+//   nome: 'Romeu',
+//   sobrenome: 'Carvalho',
+//   idade: 31,
+// };
+// console.log(objeto2);
+
+// //Extract e Exclude
+// type ABC = 'A' | 'B' | 'C';
+// type CDE = 'C' | 'D' | 'E';
+// type TipoExclude = Exclude<ABC, CDE>;
+// type TipoExtract = Extract<ABC, CDE>;
+
+// //
+// type AccountMongo = {
+//   _id: string;
+//   nome: string;
+//   sobrenome: string;
+//   idade: number;
+// };
+
+// type AccountApi = Pick<AccountMongo, Exclude<keyof AccountMongo, '_id'>> & {
+//   id: string;
+// };
+
+// const accountMongo: AccountMongo = {
+//   _id: '06179',
+//   nome: 'Raul',
+//   sobrenome: 'Gomes',
+//   idade: 30,
+// };
+
+// function mapAccount(accountMongo: AccountMongo): AccountApi {
+//   const { _id, ...accountData } = accountMongo;
+//   return { ...accountData, id: _id };
+// }
+
+// const accountApi = mapAccount(accountMongo);
+// console.log(accountApi);
+
+// //module mode
+// export default 1;
+
+// /* ################# Exercício ################# */
+/* Qual sua linguagem de programação favorita?
+Python
+JavaScript
+TypeScript
+###
+
+Qual sua cor favorita?
+Vermelho
+Verde
+azul */
+
+type VotingOption = {
+  numberOfVotes: number;
+  option: string;
 };
 
-console.log(objeto1);
+export class Voting {
+  private _votingOptions: VotingOption[] = [];
+  constructor(public details: string) {}
 
-type PessoaProtocol = {
-  nome?: string;
-  sobrenome?: string;
-  idade?: number;
-};
+  addVotingOption(votingOption: VotingOption): void {
+    this._votingOptions.push(votingOption);
+  }
 
-//Required ~ Transforma tudo que opcional em obrigatório.
-type PessoaRequired = Required<PessoaProtocol>;
-//Required ~ Transforma tudo que obrigatório em opcional.
-type PessoaPartial = Partial<PessoaRequired>;
-//Readonly
-type PessoaReadonly = Readonly<PessoaRequired>;
-//Pick ~ Escolhe as chaves que eu quero do objeto.
-type PessoaPick = Pick<PessoaRequired, 'nome' | 'sobrenome'>;
+  vote(votingIndex: number): void {
+    if (!this._votingOptions[votingIndex]) return;
+    this._votingOptions[votingIndex].numberOfVotes += 1;
+  }
 
-const objeto2: PessoaReadonly = {
-  nome: 'Romeu',
-  sobrenome: 'Carvalho',
-  idade: 31,
-};
-console.log(objeto2);
-
-//Extract e Exclude
-type ABC = 'A' | 'B' | 'C';
-type CDE = 'C' | 'D' | 'E';
-type TipoExclude = Exclude<ABC, CDE>;
-type TipoExtract = Extract<ABC, CDE>;
-
-//
-type AccountMongo = {
-  _id: string;
-  nome: string;
-  sobrenome: string;
-  idade: number;
-};
-
-type AccountApi = Pick<AccountMongo, Exclude<keyof AccountMongo, '_id'>> & {
-  id: string;
-};
-
-const accountMongo: AccountMongo = {
-  _id: '06179',
-  nome: 'Raul',
-  sobrenome: 'Gomes',
-  idade: 30,
-};
-
-function mapAccount(accountMongo: AccountMongo): AccountApi {
-  const { _id, ...accountData } = accountMongo;
-  return { ...accountData, id: _id };
+  get votingOptions(): VotingOption[] {
+    return this._votingOptions;
+  }
 }
 
-const accountApi = mapAccount(accountMongo);
-console.log(accountApi);
+export class VotingApp {
+  private voting: Voting[] = [];
 
-//module mode
-export default 1;
+  addVoting(voting: Voting): void {
+    this.voting.push(voting);
+  }
+
+  showVoting(): void {
+    for (const votes of this.voting) {
+      console.log(votes.details);
+      for (const votingOption of votes.votingOptions) {
+        console.log(votingOption.option, votingOption.numberOfVotes);
+      }
+      console.log('###');
+      console.log('');
+    }
+  }
+}
+
+const voting1 = new Voting('Qual sua linguagem de programação favorita?');
+voting1.addVotingOption({ option: 'Python', numberOfVotes: 0 });
+voting1.addVotingOption({ option: 'JavaScript', numberOfVotes: 0 });
+voting1.addVotingOption({ option: 'TypeScript', numberOfVotes: 0 });
+voting1.vote(1);
+voting1.vote(1);
+voting1.vote(0);
+voting1.vote(0);
+voting1.vote(0);
+voting1.vote(2);
+
+const voting = new Voting('Qual sua cor favorita?');
+voting.addVotingOption({ option: 'Vermelho', numberOfVotes: 0 });
+voting.addVotingOption({ option: 'Verde', numberOfVotes: 0 });
+voting.addVotingOption({ option: 'Azul', numberOfVotes: 0 });
+voting.vote(1);
+voting.vote(1);
+voting.vote(0);
+voting.vote(0);
+voting.vote(0);
+voting.vote(2);
+
+const votingApp = new VotingApp();
+votingApp.addVoting(voting1);
+votingApp.addVoting(voting);
+
+votingApp.showVoting();

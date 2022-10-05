@@ -143,32 +143,82 @@
 // console.log(method);
 
 // /* ################# Aula 56 ################# */
-function decorador(
-  classPrototype: any,
-  nomeMethod: string | symbol,
-  index: number,
-): any {
-  console.log(classPrototype);
-  console.log(nomeMethod);
-  console.log(index);
+// function decorador(
+//   classPrototype: any,
+//   nomeMethod: string | symbol,
+//   index: number,
+// ): any {
+//   console.log(classPrototype);
+//   console.log(nomeMethod);
+//   console.log(index);
+// }
+
+// export class UmaPessoa {
+//   nome: string;
+//   sobrenome: string;
+//   idade: number;
+
+//   constructor(
+//     @decorador nome: string,
+//     @decorador sobrenome: string,
+//     @decorador idade: number,
+//   ) {
+//     this.nome = nome;
+//     this.sobrenome = sobrenome;
+//     this.idade = idade;
+//   }
+
+//   method(@decorador msg: string): string {
+//     return `${this.nome} ${this.sobrenome}: ${msg}`;
+//   }
+
+//   get nomeCompleto(): string {
+//     return this.nome + ' ' + this.sobrenome;
+//   }
+
+//   set nomeCompleto(valor: string) {
+//     const palavras = valor.split(/\s+/g);
+//     const primeiroNome = palavras.shift();
+//     if (!primeiroNome) return;
+//     this.nome = primeiroNome;
+//     this.sobrenome = palavras.join(' ');
+//   }
+// }
+
+// const pessoa = new UmaPessoa('Raul', 'Gomes', 30);
+// const method = pessoa.method('Hello world');
+// console.log(method);
+
+// /* ################# Aula 57 ################# */
+function decorador(classPrototype: any, nome: string | symbol): any {
+  let valorPropriedade: any;
+  return {
+    get: () => valorPropriedade,
+    set: (valor: any) => {
+      if (typeof valor === 'string') {
+        valorPropriedade = valor.split('').reverse().join('');
+        return;
+      }
+      valorPropriedade = valor;
+    },
+  };
 }
 
 export class UmaPessoa {
+  @decorador
   nome: string;
+  @decorador
   sobrenome: string;
+  @decorador
   idade: number;
 
-  constructor(
-    @decorador nome: string,
-    @decorador sobrenome: string,
-    @decorador idade: number,
-  ) {
+  constructor(nome: string, sobrenome: string, idade: number) {
     this.nome = nome;
     this.sobrenome = sobrenome;
     this.idade = idade;
   }
 
-  method(@decorador msg: string): string {
+  method(msg: string): string {
     return `${this.nome} ${this.sobrenome}: ${msg}`;
   }
 

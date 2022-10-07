@@ -25,11 +25,20 @@
 // /// <reference path="modulo.ts" />
 
 // /* ################# Aula 61 ################# */
-import { soma } from './aula24.js';
-const result = soma(10, 20) as number;
-console.log(result);
+// import { soma } from './aula24.js';
+// const result = soma(10, 20) as number;
+// console.log(result);
 
-/* ####### IMPORT NO JavaScript ####### */
-export function soma(x, y) {
-  return x + y;
-}
+// /* ####### IMPORT NO JavaScript ####### */
+// export function soma(x, y) {
+//   return x + y;
+// }
+
+// /* ################# Aula 62 ################# */
+/* npm i lodash,
+"@types/lodash": "4.14.186" */
+import validator from 'validator';
+import _ from 'lodash';
+
+console.log(validator.isEmail('raul@gmail.com'));
+console.log(_.clone([1, 2, 3, 4, 5]));

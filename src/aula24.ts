@@ -71,3 +71,5 @@ declare namespace NodeJS {
     MINHAGLOBAL: string;
   }
 }
+//atualizar pacotes
+/* npx npm-check -u */

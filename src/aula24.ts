@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* ################# Aula 60 ################# */
+/* ################# Aula 59/60 ################# */
 namespace MeuNamespace {
   export const nameDoNamespace = 'Raul';
 
@@ -15,9 +15,11 @@ namespace MeuNamespace {
   }
 }
 
+const constDoNamespace = 'Valor da const do namespace';
 const pessoa = new MeuNamespace.PessoaDoNamespace('Raul');
 console.log(pessoa);
 console.log(MeuNamespace.nameDoNamespace);
 console.log(MeuNamespace.OutroNamespace.nomeDoNamespace);
 
-export default 1;
+//npx tsc src/aula24.ts --outFile src/aula24.js
+/// <reference path="modulo.ts" />
